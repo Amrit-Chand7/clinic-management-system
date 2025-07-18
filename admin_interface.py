@@ -19,46 +19,46 @@ def manage_doctors():
     doctor.resizable(False, False)
 
     add_frame = Frame(doctor, bg="white") 
-    add_frame.place(relx=0.27, rely=0.1, width=350, height=280) 
+    add_frame.place(relx=0.27, rely=0.1, width=390, height=280) 
 
     # ---------- Add Doctor Section ----------
-    add_label = Label(add_frame, text="Add Doctor", fg="black", font=("Arial", 18, "bold"))
+    add_label = Label(add_frame, text="Add Doctor",bg= "white", fg="black" ,font=("Arial", 18, "bold"))
     add_label.place(x=110,y=10)
 
-    name_label = Label(add_frame, text="Name:", fg="black", font=("Arial", 12))
+    name_label = Label(add_frame, text="Name:", fg="black",bg="white", font=("Arial", 13))
     name_label.place(x=20, y=60)
-    add_name_entry = Entry(add_frame, width=25,bg="white")
+    add_name_entry = Entry(add_frame, width=20,bg="white", fg="black")
     add_name_entry.place(x=140, y=60)
 
-    spec_label = Label(add_frame, text="Specialization:", fg="black", font=("Arial", 12))
-    spec_label.place(x=20, y=100)
-    add_spec_entry = Entry(add_frame, width=25,bg="white")
-    add_spec_entry.place(x=140, y=100)
-    
-    number_label = Label(add_frame, text="Phone Number:", fg="black", font=("Arial", 12))
-    number_label.place(x=20, y=150)
-    number_spec_entry = Entry(add_frame, width=25,bg="white")
+    spec_label = Label(add_frame, text="Specialization:", fg="black",bg="white",font=("Arial", 13))
+    spec_label.place(x=20, y=105)
+    add_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
+    add_spec_entry.place(x=140, y=103)
+
+    number_label = Label(add_frame, text="Phone Number:", fg="black", bg="white", font=("Arial", 13))
+    number_label.place(x=20, y=153)
+    number_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
     number_spec_entry.place(x=140, y=150)
     
 
-    btn_save = Button(add_frame, text="Save", bg="green", fg="white", width=12, font=("Arial", 14))
+    btn_save = Button(add_frame, text="Save", fg="Green", width=12, font=("Arial", 14))
     btn_save.place(x=100, y=200)
     
     #doctor frame 
     remove_frame = Frame(doctor, bg="white") 
-    remove_frame.place(relx=0.27, rely=0.5, width=350, height=280) 
+    remove_frame.place(relx=0.27, rely=0.5, width=390, height=280) 
 
     # ---------- Remove doctor ----------
-    remove_label = Label(remove_frame, text="Remove Doctor", fg="black", font=("Arial", 18, "bold"))
-    remove_label.place(x=80,y=20)
+    remove_label = Label(remove_frame, text="Remove Doctor",bg= "white", fg="black", font=("Arial", 18, "bold"))
+    remove_label.place(x=85,y=20)
 
-    phone_num_label = Label(remove_frame, text="Phone number:", fg="black", font=("Arial", 12))
+    phone_num_label = Label(remove_frame, text="Phone number:", fg="black",bg="white", font=("Arial", 14))
     phone_num_label.place(x=25, y=90)
-    phone_num_entry = Entry(remove_frame, width=25,bg="white")
-    phone_num_entry.place(x=150, y=92)
+    phone_num_entry = Entry(remove_frame, width=20,bg="white",fg="black")
+    phone_num_entry.place(x=150, y=88)
 
-    btn_del = Button(remove_frame, text="Delete", bg="green", fg="white", width=12, font=("Arial", 14))
-    btn_del.place(x=90, y=170)
+    btn_del = Button(remove_frame, text="Delete", fg="blue", width=12, font=("Arial", 14))
+    btn_del.place(x=100, y=160)
 
 
 
