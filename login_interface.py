@@ -23,6 +23,17 @@ c.execute('''
         confirm_password TEXT(30)
     )
 ''')
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS admin (
+        phone TEXT(10),
+        password TEXT(30)
+    )
+''')
+
+c.execute("SELECT * FROM admin WHERE phone = ?", ("9745",))
+if not c.fetchone():
+    c.execute("INSERT INTO admin (phone, password) VALUES (?, ?)", ("9745", "amrit"))
+
 conn.commit()
 conn.close()
 
@@ -30,18 +41,27 @@ conn.close()
 def login():
     p = phone_entry.get()
     pas = password_entry.get()
-    
-    if p == "9745702074" and pas == "amrit@221":
-        login_interface = Toplevel()
-        login_interface.title("Clinic Management System")
-        login_interface.geometry("600x400")
-        login_interface.configure(bg="blue")
-        after_login_text=Label(login_interface, text="WELCOME TO MY WEB APPLICATION", fg="red", bg="blue", font=("Arial", 18))
-        after_login_text.place(x=30, y=30)
-    elif not p or not pas:
+
+    if not p or not pas:
         messagebox.showerror("Login Failed", "Enter both phone number and password")
+        return # Stop execution here if inputs are empty
+        
+
+    conn = sqlite3.connect("clinic_management_system.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM admin WHERE phone = ? AND password = ?", (p, pas)) 
+    result = c.fetchone()
+    conn.close()    
+    
+    if result==None:
+        messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
+        phone_entry.delete(0,END)
+        password_entry.delete(0,END)
     else:
-        messagebox.showerror("Login Failed", "Invalid phone number or password")
+        messagebox.showinfo("Login Successful", "Welcome to the Clinic Management System!")
+
+          
+
 
 # ------------------ Register Function ------------------
 def register():
