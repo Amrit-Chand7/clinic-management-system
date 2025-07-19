@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from admin_interface import admin_dashboard  
 import sqlite3
 
 root = Tk()
@@ -23,21 +24,20 @@ c.execute('''
         confirm_password TEXT(30)
     )
 ''')
+
 conn.commit()
 conn.close()
+
+
 
 # ------------------ Login Function ------------------
 def login():
     p = phone_entry.get()
     pas = password_entry.get()
     
-    if p == "9745702074" and pas == "amrit@221":
-        login_interface = Toplevel()
-        login_interface.title("Clinic Management System")
-        login_interface.geometry("600x400")
-        login_interface.configure(bg="blue")
-        after_login_text=Label(login_interface, text="WELCOME TO MY WEB APPLICATION", fg="red", bg="blue", font=("Arial", 18))
-        after_login_text.place(x=30, y=30)
+    if p == "97" and pas == "a":
+        
+        admin_dashboard()
     elif not p or not pas:
         messagebox.showerror("Login Failed", "Enter both phone number and password")
     else:
