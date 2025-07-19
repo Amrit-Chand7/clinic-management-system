@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from admin_interface import admin_dashboard  
+from admin_interface import admin_dashboard 
 import sqlite3
 
 root = Tk()
@@ -24,24 +24,45 @@ c.execute('''
         confirm_password TEXT(30)
     )
 ''')
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS admin (
+        phone TEXT(10),
+        password TEXT(30)
+    )
+''')
+
+c.execute("SELECT * FROM admin WHERE phone = ?", ("9745",))
+if not c.fetchone():
+    c.execute("INSERT INTO admin (phone, password) VALUES (?, ?)", ("9745", "amrit"))
 
 conn.commit()
 conn.close()
-
-
 
 # ------------------ Login Function ------------------
 def login():
     p = phone_entry.get()
     pas = password_entry.get()
-    
-    if p == "97" and pas == "a":
-        
-        admin_dashboard()
-    elif not p or not pas:
+
+    if not p or not pas:
         messagebox.showerror("Login Failed", "Enter both phone number and password")
+        return # Stop execution here if inputs are empty
+        
+
+    conn = sqlite3.connect("clinic_management_system.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM admin WHERE phone = ? AND password = ?", (p, pas)) 
+    result = c.fetchone()
+    conn.close()    
+    
+    if result==None:
+        messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
+        phone_entry.delete(0,END)
+        password_entry.delete(0,END)
     else:
-        messagebox.showerror("Login Failed", "Invalid phone number or password")
+        root.withdraw()  # Hide the main window
+        admin_dashboard()
+          
+
 
 # ------------------ Register Function ------------------
 def register():
