@@ -1,6 +1,7 @@
+import sqlite3
 from tkinter import *
 from tkinter import messagebox
-import sqlite3
+
 
 # Function to handle password update
 def change_password():
@@ -32,7 +33,7 @@ def change_password():
     confirm_label.place(x=50, y=140)
     confirm_pass_entry = Entry(password_window, font=("Arial", 12), bg="white", fg="black", width=25, show="*")
     confirm_pass_entry.place(x=225, y=140)
-    
+
     # Function to handle cancellation
     def save():
         phone_n = num1_entry.get()
@@ -77,4 +78,3 @@ def change_password():
 
     save_btn = Button(password_window, text="Save", font=("Arial", 12), width=12, command=save)
     save_btn.place(x=130, y=210)
-
