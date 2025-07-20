@@ -55,22 +55,51 @@ def admin_dashboard():
             add_spec_entry.delete(0, END)
             number_spec_entry.delete(0, END)
 
+        def delete_doc():
+            phone_num2 = phone_num1_entry.get()
+            if not phone_num2:
+                messagebox.showwarning("Warning", "Phone number is required")
+                return
+
+            conn = sqlite3.connect("clinic_management_system.db")
+            c= conn.cursor()
+
+            c.execute("SELECT * FROM doctor WHERE phone = ?", (phone_num2,))
+            result1=c.fetchone()
+            conn.commit()
+            conn.close()
+            if result1!=None:
+                conn= sqlite3.connect("clinic_management_system.db")
+                c = conn.cursor()
+                c.execute('''
+                          DELETE FROM doctor WHERE phone = ?
+                          ''', (phone_num2,))
+                conn.commit()
+                conn.close()
+                messagebox.showinfo("Success", "Doctor removed successfully")
+                phone_num1_entry.delete(0, END)
+
+            else:
+                messagebox.showerror("Warning", "Number not found")
+
+
+
         # ---------- Add Doctor Section ----------
         add_label = Label(add_frame, text="Add Doctor",bg= "white", fg="black" ,font=("Arial", 18, "bold"))
         add_label.place(x=110,y=10)
 
         name_label = Label(add_frame, text="Name:", fg="black",bg="white", font=("Arial", 13))
-        name_label.place(x=20, y=60)
+        name_label.place(x=20, y=58)
         add_name_entry = Entry(add_frame, width=20,bg="white", fg="black")
         add_name_entry.place(x=140, y=60)
 
         spec_label = Label(add_frame, text="Specialization:", fg="black",bg="white",font=("Arial", 13))
         spec_label.place(x=20, y=105)
         add_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
-        add_spec_entry.place(x=140, y=103)
+        add_spec_entry.place(x=140, y=105)
 
         number_label = Label(add_frame, text="Phone Number:", fg="black", bg="white", font=("Arial", 13))
-        number_label.place(x=20, y=153)
+        number_label.place(x=20, y=155)
         number_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
         number_spec_entry.place(x=140, y=150)
 
@@ -88,12 +117,12 @@ def admin_dashboard():
 
         phone_num_label = Label(remove_frame, text="Phone number:", fg="black",bg="white", font=("Arial", 14))
         phone_num_label.place(x=25, y=90)
-        phone_num_entry = Entry(remove_frame, width=20,bg="white",fg="black")
-        phone_num_entry.place(x=150, y=88)
+        phone_num1_entry = Entry(remove_frame, width=20,bg="white",fg="black")
+        phone_num1_entry.place(x=157, y=90)
 
     
 
-        btn_del = Button(remove_frame, text="Delete", fg="blue", width=12, font=("Arial", 14))
+        btn_del = Button(remove_frame, text="Delete", fg="blue", width=12, font=("Arial", 14),command= delete_doc)
         btn_del.place(x=100, y=160)
 
         # ------------------ Image ------------------
