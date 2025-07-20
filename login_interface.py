@@ -56,7 +56,6 @@ def login():
     
     if result==None:
         messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
-        phone_entry.delete(0,END)
         password_entry.delete(0,END)
     else:
         root.withdraw()  # Hide the main window

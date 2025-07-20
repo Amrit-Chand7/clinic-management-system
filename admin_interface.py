@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from change_pass import change_password
 
 def admin_dashboard():
     # ------- Admin Dashboard ---------
@@ -77,11 +78,13 @@ def admin_dashboard():
     img_label1 = Label(admin_frame, image=photo1)
     img_label1.place(x=0, y=0)
 
+    
+
     #  Buttons on Left
     manage_doctors_btn = Button(admin_frame, text="Manage Doctor", font=("Arial", 14), width=18, command=manage_doctors)
     manage_doctors_btn.place(x=30, y=150)
 
-    admin_pass_change = Button(admin_frame, text="Change Password", font=("Arial", 14), width=18)
+    admin_pass_change = Button(admin_frame, text="Change Password", font=("Arial", 14), width=18,command=change_password)
     admin_pass_change.place(x=30, y=220)
 
     admin_logout_btn = Button(admin_frame, text="Log Out", font=("Arial", 14), width=18, fg="red",command=logout)
