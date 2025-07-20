@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from admin_interface import admin_dashboard 
 import sqlite3
 
 root = Tk()
@@ -58,8 +59,8 @@ def login():
         phone_entry.delete(0,END)
         password_entry.delete(0,END)
     else:
-        messagebox.showinfo("Login Successful", "Welcome to the Clinic Management System!")
-
+        root.withdraw()  # Hide the main window
+        admin_dashboard()
           
 
 
