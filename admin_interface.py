@@ -1,6 +1,8 @@
 from tkinter import *
+from tkinter import messagebox
 from PIL import Image, ImageTk
 from change_pass import change_password
+import sqlite3
 
 def admin_dashboard():
     # ------- Admin Dashboard ---------
@@ -20,6 +22,7 @@ def admin_dashboard():
     def logout():
         admin.destroy()
         
+        
     def manage_doctors():
         doctor = Toplevel(admin)
         doctor.title("Manage Doctors")
@@ -29,6 +32,28 @@ def admin_dashboard():
 
         add_frame = Frame(doctor, bg="white") 
         add_frame.place(relx=0.27, rely=0.1, width=390, height=280) 
+
+        def add_doc():
+            name_doc= add_name_entry.get()
+            spec_doc = add_spec_entry.get()
+            phone_doc = number_spec_entry.get()
+            if not name_doc or not spec_doc or not phone_doc:
+                messagebox.showwarning("Warning", "All fields are required")
+                return
+
+            conn = sqlite3.connect("clinic_management_system.db")
+            cursor = conn.cursor()
+            cursor.execute('''
+                 INSERT INTO doctor (name, phone, specialization)
+                VALUES (?, ?, ?)
+                ''', (name_doc, phone_doc, spec_doc))
+            conn.commit()
+            conn.close()    
+
+            messagebox.showinfo("Success", "Doctor added successfully")
+            add_name_entry.delete(0, END)
+            add_spec_entry.delete(0, END)
+            number_spec_entry.delete(0, END)
 
         # ---------- Add Doctor Section ----------
         add_label = Label(add_frame, text="Add Doctor",bg= "white", fg="black" ,font=("Arial", 18, "bold"))
@@ -48,9 +73,9 @@ def admin_dashboard():
         number_label.place(x=20, y=153)
         number_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
         number_spec_entry.place(x=140, y=150)
-    
 
-        btn_save = Button(add_frame, text="Save", fg="Green", width=12, font=("Arial", 14))
+    
+        btn_save = Button(add_frame, text="Save", fg="Green", width=12, font=("Arial", 14), command=add_doc)
         btn_save.place(x=100, y=200)
     
         #doctor frame 

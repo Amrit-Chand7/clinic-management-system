@@ -35,6 +35,15 @@ c.execute("SELECT * FROM admin WHERE phone = ?", ("9745",))
 if not c.fetchone():
     c.execute("INSERT INTO admin (phone, password) VALUES (?, ?)", ("9745", "amrit"))
 
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS doctor (
+        name TEXT(20),
+        phone TEXT(10),
+        specialization TEXT(30)
+        
+    )
+''')
+
 conn.commit()
 conn.close()
 
