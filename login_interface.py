@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
 from admin_interface import admin_dashboard 
+from patient_interface import user_dashboard
 import sqlite3
 
 root = Tk()
@@ -64,8 +65,17 @@ def login():
     conn.close()    
     
     if result==None:
-        messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
-        password_entry.delete(0,END)
+        conn = sqlite3.connect("clinic_management_system.db")
+        c = conn.cursor()
+        c.execute("SELECT * FROM clinic_record WHERE phone = ? AND password = ?", (p, pas)) 
+        result2 = c.fetchone()
+        conn.close()
+        if result2 == None :
+            messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
+            password_entry.delete(0,END)
+        else:
+            root.withdraw()
+            user_dashboard()
     else:
         root.withdraw()  # Hide the main window
         admin_dashboard()
