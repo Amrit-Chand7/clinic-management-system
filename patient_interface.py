@@ -47,9 +47,8 @@ def open_change_password():
 
     # Function to handle cancellation
     def cancel2():
-        result = messagebox.askyesno("Cancel", "Are you sure you want to cancel?")
-        if result==True:
-            change_password_window.destroy()
+        messagebox.showinfo("Cancel", "Cancel")
+        change_password_window.destroy()
     
     # Labels and Entry fields for Change Password
     old_pass3=Label(change_password_window, text="Old Password:", bg="light blue",fg="black", font=("Arial", 16))
@@ -95,10 +94,8 @@ def open_update_profile():
             update_profile_window.destroy()
 
     def cancel10():
-        result = messagebox.askyesno("Cancel", "Are you sure you want to cancel?")
-        if result == True:
-            messagebox.showinfo("Cancelled", "Profile update cancelled.")
-            update_profile_window.destroy()
+        messagebox.showinfo("Cancel", "Cancel")
+        update_profile_window.destroy()
 
 
 
