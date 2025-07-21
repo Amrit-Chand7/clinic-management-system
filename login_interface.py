@@ -25,6 +25,18 @@ c.execute('''
         confirm_password TEXT(30)
     )
 ''')
+
+conn = sqlite3.connect("clinic_management_system.db")
+c = conn.cursor()
+c.execute('''
+          CREATE TABLE IF NOT EXISTS appointment (
+          doctor TEXT(20),
+          date TEXT(10),
+          time TEXT(10),
+          phone TEXT(10)
+          )
+          ''')
+
 c.execute(''' 
     CREATE TABLE IF NOT EXISTS admin (
         phone TEXT(10),
