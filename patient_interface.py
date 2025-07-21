@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from appoinment import appointment_dashboard
 
 
 # Function to open Appointment window
@@ -12,12 +13,10 @@ def user_dashboard():
 
     dashboard_frame = Frame(patient_dashboard, bg="white")
     dashboard_frame.place(relx=0.5, rely=0.5, anchor="center", width=880, height=560)
+    
     def open_appointment():
-        appointment_window = Toplevel(patient_dashboard)
-        appointment_window.title("Appointment")
-        appointment_window.geometry("500x300")  
-        appointment_window.configure(bg="light blue")
-        appointment_window.resizable(False, False)
+        appointment_dashboard()
+
 
     # Function to open Change Password window
     def open_change_password():
