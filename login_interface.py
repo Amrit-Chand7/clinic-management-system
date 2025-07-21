@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from admin_interface import admin_dashboard 
+import sqlite3
 
 root = Tk()
 root.title("Clinic Management System")
@@ -8,22 +10,67 @@ root.geometry("900x600")
 root.configure(bg="light blue")  # Light blue
 
 #all functions
+# ------------------ Database Setup ------------------
+
+conn = sqlite3.connect("clinic_management_system.db")
+c = conn.cursor()
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS clinic_record (
+        full_name TEXT(20),
+        phone TEXT(10),
+        date_of_birth TEXT(30),
+        gender TEXT(30),
+        password TEXT(30),
+        confirm_password TEXT(30)
+    )
+''')
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS admin (
+        phone TEXT(10),
+        password TEXT(30)
+    )
+''')
+
+c.execute("SELECT * FROM admin WHERE phone = ?", ("9745",))
+if not c.fetchone():
+    c.execute("INSERT INTO admin (phone, password) VALUES (?, ?)", ("9745", "amrit"))
+
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS doctor (
+        name TEXT(20),
+        phone TEXT(10),
+        specialization TEXT(30)
+        
+    )
+''')
+
+conn.commit()
+conn.close()
+
 # ------------------ Login Function ------------------
 def login():
     p = phone_entry.get()
     pas = password_entry.get()
-    
-    if p == "9745702074" and pas == "amrit@221":
-        login_interface = Toplevel()
-        login_interface.title("Clinic Management System")
-        login_interface.geometry("600x400")
-        login_interface.configure(bg="blue")
-        after_login_text=Label(login_interface, text="WELCOME TO MY WEB APPLICATION", fg="red", bg="blue", font=("Arial", 18))
-        after_login_text.place(x=30, y=30)
-    elif not p or not pas:
+
+    if not p or not pas:
         messagebox.showerror("Login Failed", "Enter both phone number and password")
+        return # Stop execution here if inputs are empty
+        
+
+    conn = sqlite3.connect("clinic_management_system.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM admin WHERE phone = ? AND password = ?", (p, pas)) 
+    result = c.fetchone()
+    conn.close()    
+    
+    if result==None:
+        messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
+        password_entry.delete(0,END)
     else:
-        messagebox.showerror("Login Failed", "Invalid phone number or password")
+        root.withdraw()  # Hide the main window
+        admin_dashboard()
+          
+
 
 # ------------------ Register Function ------------------
 def register():
@@ -101,17 +148,24 @@ def register():
         if pass1 != pass2:
             messagebox.showerror("Error", "Passwords do not match ❌")
             return
+        
+        conn = sqlite3.connect("clinic_management_system.db")
+        c = conn.cursor()
+        c.execute('''
+            INSERT INTO clinic_record(full_name, phone, date_of_birth, gender, password, confirm_password)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (n, ph, d, g, pass1, pass2))
+        conn.commit()
+        conn.close()
 
         messagebox.showinfo("Congratulations 🎉", "Registered Successfully!")
-        name_entry.delete(0, END)
-        phone_entry.delete(0, END)
-        birth_entry.delete(0, END)
-        gender_var.delete(0, END)
-        password1_entry.delete(0, END)
-        password2_entry.delete(0, END)
 
-    btn_register2=Button(frame2, text="REGISTER", font=("Arial", 16), fg="blue", command=popup)
-    btn_register2.place(x=225, y=330)
+        #destroy the registration window after successful registration
+        window.destroy()
+
+
+    btn_register2=Button(frame2, text="REGISTER", font=("Arial", 18), fg="blue", command=popup)
+    btn_register2.place(x=283, y=335)
 
 # ------------------ Login Frame -----------
 frame1 = Frame(root, bg="white")
