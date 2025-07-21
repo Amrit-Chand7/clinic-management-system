@@ -124,7 +124,7 @@ def user_dashboard():
     def log_out():
         result = messagebox.askyesno("Log Out", "Are you sure you want to log out?")
         if result == True:
-            patient_dashboard.quit()
+            patient_dashboard.destroy()
 
     img = Image.open("image/admin.jpg")  
     img = img.resize((880, 560))
