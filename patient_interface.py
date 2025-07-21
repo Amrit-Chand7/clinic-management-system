@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from appoinment import appointment_dashboard
+from appointment import appointment_dashboard
 
 
 # Function to open Appointment window
