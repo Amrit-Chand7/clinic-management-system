@@ -31,12 +31,13 @@ def open_change_password():
 
     # Function to handle password update
     def change_password7():
+        ph4=ph3_entry.get()
         old_password4 = old_pass3_entry.get()
         new_password4 = new_pass3_entry.get()
         confirm_password4 = confirm_pass3_entry.get()
 
         # Validate if all fields are filled
-        if old_password4 and new_password4 and confirm_password4:
+        if ph4 and old_password4 and new_password4 and confirm_password4:
             if new_password4 == confirm_password4:
                 messagebox.showinfo("Password Change Successful", "Your password has been changed!")
                 change_password_window.destroy()
@@ -51,6 +52,13 @@ def open_change_password():
         change_password_window.destroy()
     
     # Labels and Entry fields for Change Password
+    ph3_label=Label(change_password_window, text="Phone Number:", bg="light blue",fg="black", font=("Arial", 16))
+    ph3_label.place(x=50, y=10)
+    ph3_entry = Entry(change_password_window, font=("Arial", 15), width=15, bg="white",fg="black", show="*")
+    ph3_entry.place(x=230, y=10)
+
+
+
     old_pass3=Label(change_password_window, text="Old Password:", bg="light blue",fg="black", font=("Arial", 16))
     old_pass3.place(x=50, y=60)
     old_pass3_entry = Entry(change_password_window, font=("Arial", 15), width=15, bg="white",fg="black", show="*")
