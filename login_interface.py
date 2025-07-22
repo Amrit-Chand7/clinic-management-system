@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
 from admin_interface import admin_dashboard 
+from patient_interface import user_dashboard
 import sqlite3
 
 root = Tk()
@@ -24,6 +25,18 @@ c.execute('''
         confirm_password TEXT(30)
     )
 ''')
+
+conn = sqlite3.connect("clinic_management_system.db")
+c = conn.cursor()
+c.execute('''
+          CREATE TABLE IF NOT EXISTS appointment (
+          doctor TEXT(20),
+          date TEXT(10),
+          time TEXT(10),
+          phone TEXT(10)
+          )
+          ''')
+
 c.execute(''' 
     CREATE TABLE IF NOT EXISTS admin (
         phone TEXT(10),
@@ -34,6 +47,15 @@ c.execute('''
 c.execute("SELECT * FROM admin WHERE phone = ?", ("9745",))
 if not c.fetchone():
     c.execute("INSERT INTO admin (phone, password) VALUES (?, ?)", ("9745", "amrit"))
+
+c.execute(''' 
+    CREATE TABLE IF NOT EXISTS doctor (
+        name TEXT(20),
+        phone TEXT(10),
+        specialization TEXT(30)
+        
+    )
+''')
 
 conn.commit()
 conn.close()
@@ -55,8 +77,17 @@ def login():
     conn.close()    
     
     if result==None:
-        messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
-        password_entry.delete(0,END)
+        conn = sqlite3.connect("clinic_management_system.db")
+        c = conn.cursor()
+        c.execute("SELECT * FROM clinic_record WHERE phone = ? AND password = ?", (p, pas)) 
+        result2 = c.fetchone()
+        conn.close()
+        if result2 == None :
+            messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
+            password_entry.delete(0,END)
+        else:
+            root.withdraw()
+            user_dashboard()
     else:
         root.withdraw()  # Hide the main window
         admin_dashboard()
