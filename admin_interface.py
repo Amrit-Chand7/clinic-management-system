@@ -9,7 +9,7 @@ def admin_dashboard():
     
     admin = Toplevel()
     admin.title("Admin Dashboard")
-    admin.geometry("900x600")
+    admin.state('zoomed')
     admin.configure(bg="light blue")
 
     admin_frame = Frame(admin, bg="white")
@@ -19,9 +19,14 @@ def admin_dashboard():
 
 
     # ------------------ All Functions ------------------
+    def view_appointment():
+        appointment1 = Toplevel() 
+        appointment1.title("View appointment")
+        appointment1.geometry("400x400")
+        appointment1.config(bg="light blue")
+        
     def logout():
         admin.destroy()
-        
         
     def manage_doctors():
         doctor = Toplevel(admin)
@@ -135,6 +140,10 @@ def admin_dashboard():
     
 
     #  Buttons on Left
+    
+    view_btn = Button(admin_frame, text="View Appointment", font=("Arial", 14), width=18, command=view_appointment)
+    view_btn.place(x=30, y=80)
+    
     manage_doctors_btn = Button(admin_frame, text="Manage Doctor", font=("Arial", 14), width=18, command=manage_doctors)
     manage_doctors_btn.place(x=30, y=150)
 
