@@ -84,4 +84,4 @@ def appointment_dashboard():
     cancel_btn = Button(final_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=10, command=final_window.destroy)
     cancel_btn.place(x=235, y=365)
 
-    final_window.mainloop()
+  

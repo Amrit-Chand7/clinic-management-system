@@ -135,17 +135,17 @@ def admin_dashboard():
         name_label = Label(add_frame, text="Name:", fg="black",bg="white", font=("Arial", 13))
         name_label.place(x=20, y=58)
         add_name_entry = Entry(add_frame, width=20,bg="white", fg="black")
-        add_name_entry.place(x=140, y=60)
+        add_name_entry.place(x=142, y=60)
 
         spec_label = Label(add_frame, text="Specialization:", fg="black",bg="white",font=("Arial", 13))
         spec_label.place(x=20, y=105)
         add_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
-        add_spec_entry.place(x=140, y=105)
+        add_spec_entry.place(x=142, y=108)
 
         number_label = Label(add_frame, text="Phone Number:", fg="black", bg="white", font=("Arial", 13))
         number_label.place(x=20, y=155)
         number_spec_entry = Entry(add_frame, width=20,bg="white", fg="black")
-        number_spec_entry.place(x=140, y=150)
+        number_spec_entry.place(x=142, y=153)
 
     
         btn_save = Button(add_frame, text="Save", fg="Green", width=12, font=("Arial", 14), command=add_doc)
@@ -160,7 +160,7 @@ def admin_dashboard():
         remove_label.place(x=85,y=20)
 
         phone_num_label = Label(remove_frame, text="Phone number:", fg="black",bg="white", font=("Arial", 14))
-        phone_num_label.place(x=25, y=90)
+        phone_num_label.place(x=32, y=94)
         phone_num1_entry = Entry(remove_frame, width=20,bg="white",fg="black")
         phone_num1_entry.place(x=157, y=90)
 

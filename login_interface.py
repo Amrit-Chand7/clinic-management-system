@@ -95,30 +95,30 @@ def login():
 def register():
     window = Toplevel()
     window.title("Register")
-    window.geometry("600x400")
+    window.geometry("650x450")
     window.resizable(False, False)
 
     # Create frame
     frame2 = Frame(window, bg="light blue")
-    frame2.place(relx=0.5, rely=0.5, anchor="center", width=600, height=400)
+    frame2.place(relx=0.5, rely=0.5, anchor="center", width=650, height=450)
 
     # Full Name
     full_name = Label(frame2, text="Full Name:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     full_name.place(x=60, y=30)
     name_entry = Entry(frame2, font=("Arial", 16), bg="white", fg="black",width=25)
-    name_entry.place(x=245, y=30)
+    name_entry.place(x=255, y=30)
 
     # Phone
     phone = Label(frame2, text="Phone:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     phone.place(x=60, y=80)
     phone_entry = Entry(frame2, font=("Arial", 16),bg="white", fg="black", width=25)
-    phone_entry.place(x=245, y=80)
+    phone_entry.place(x=255, y=80)
 
     # Date of Birth
     birth = Label(frame2, text="Date of Birth:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     birth.place(x=60, y=130)
     birth_entry = Entry(frame2, font=("Arial", 16), bg="white", fg="black", width=25)
-    birth_entry.place(x=245, y=130)
+    birth_entry.place(x=255, y=130)
 
     #Gender
 
@@ -129,26 +129,26 @@ def register():
     gender_var.set("Male")
 
     male_rb = Radiobutton(frame2, text="Male", variable=gender_var, value="Male", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
-    male_rb.place(x=245, y=180)
+    male_rb.place(x=255, y=180)
 
     female_rb = Radiobutton(frame2, text="Female", variable=gender_var, value="Female", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
-    female_rb.place(x=320, y=180)
+    female_rb.place(x=330, y=180)
 
     other_rb = Radiobutton(frame2, text="Other", variable=gender_var, value="Other", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
-    other_rb.place(x=410, y=180)
+    other_rb.place(x=420, y=180)
 
 
     # Password
     password1 = Label(frame2, text="Password:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     password1.place(x=60, y=230)
     password1_entry = Entry(frame2, font=("Arial", 16), show="*", bg="white", fg="black", width=25)
-    password1_entry.place(x=245, y=230)
+    password1_entry.place(x=255, y=230)
 
     # Confirm Password
     confirm_pass = Label(frame2, text="Confirm Password:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     confirm_pass.place(x=60, y=280)
     password2_entry = Entry(frame2, font=("Arial", 16), show="*", bg="white", fg="black", width=25)
-    password2_entry.place(x=245, y=280)
+    password2_entry.place(x=255, y=280)
 
 
     def popup():
@@ -226,6 +226,6 @@ register_text.place(x=295, y=320)
 
 # Register Button
 btn_register1=Button(frame1, text="Register", font=("Arial", 14), fg="green",command= register)
-btn_register1.place(x=386, y=360)
+btn_register1.place(x=386, y=370)
 
 root.mainloop()

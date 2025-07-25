@@ -176,14 +176,13 @@ def user_dashboard():
 
     # Function to log out
     def log_out():
-        result = messagebox.askyesno("Log Out", "Are you sure you want to log out?")
-        if result == True:
             patient_dashboard.destroy()
 
     img = Image.open("image/admin.jpg")  
     img = img.resize((880, 560))
     photo = ImageTk.PhotoImage(img)
     img_label = Label(dashboard_frame, image=photo)
+    img_label.image = photo
     img_label.place(x=0, y=0)
 
     #  Buttons on Left
@@ -198,5 +197,3 @@ def user_dashboard():
 
     log_out_btn = Button(dashboard_frame, text="Log Out", font=("Arial", 16), width=18, fg="red", command=log_out)
     log_out_btn.place(x=55, y=310)
-
-    patient_dashboard.mainloop()
