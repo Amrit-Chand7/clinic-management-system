@@ -6,8 +6,8 @@ import sqlite3
 
 # Sample list of doctors
 def appointment_dashboard():
-    doctor_list = ["Dr. Amrit Chand Thakuri", "Dr. Rohit Thakur", "Dr. Jharana Adhakari", "Dr. Aman Rauniyar", "Dr. Sitasma Kc", 
-                    "Dr. Pratiksha Thapa", "Dr. Suman Thapa", "Dr. Anupama Thapa", "Dr. Ayush Raut"]
+    doctor_list = ["Dr. Amrit Chand Thakuri", "Dr. Rohit Thakur", "Dr. Jharana Adhikari", "Dr. Aman Rauniyar", "Dr. Saffer Shrestha", 
+                    "Dr. Jenish Adhikari", "Dr. Aayush Raut"]
 
     final_window = Toplevel()
     final_window.title("Appointment")
@@ -43,19 +43,16 @@ def appointment_dashboard():
     def r_btn():
 
         r1=Radiobutton(final_window,text="10:00 am",variable=var1,value= "10:00 am", bg= "light blue", fg= "black",font=("Arial",14))
-        r1.place(x=250,y=190)
+        r1.place(x=250,y=170)
 
         r2=Radiobutton(final_window,text="11:00 am",variable=var1,value= "11:00 am" , bg= "light blue", fg= "black",font=("Arial",14))
-        r2.place(x=250,y=210)
+        r2.place(x=250,y=220)
 
         r3=Radiobutton(final_window,text="1:00  pm",variable=var1,value= "1:00 pm", bg= "light blue", fg= "black",font=("Arial",14))
-        r3.place(x=250,y=230)
+        r3.place(x=250,y=270)
 
         r4=Radiobutton(final_window,text="2:00  pm",variable=var1, value= "2:00 pm"  , bg= "light blue", fg= "black",font=("Arial",14))
-        r4.place(x=250,y=250)
-
-        r5=Radiobutton(final_window,text="4:00  pm",variable=var1,value= "4:00  pm", bg= "light blue", fg= "black",font=("Arial",14))
-        r5.place(x=250,y=270)
+        r4.place(x=250,y=320)
 
     def save2_btn():
         select_doctor_data= select_doctor.get()
@@ -82,9 +79,9 @@ def appointment_dashboard():
 
     # ------------------ Buttons ------------------
     save_btn = Button(final_window, text="Save", font=("Segoe UI", 16), bg="lightgreen", width=10, command = save2_btn)
-    save_btn.place(x=50, y=330)
+    save_btn.place(x=55, y=365)
 
     cancel_btn = Button(final_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=10, command=final_window.destroy)
-    cancel_btn.place(x=230, y=330)
+    cancel_btn.place(x=235, y=365)
 
     final_window.mainloop()

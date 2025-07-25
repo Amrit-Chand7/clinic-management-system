@@ -7,7 +7,7 @@ import sqlite3
 
 root = Tk()
 root.title("Clinic Management System")
-root.geometry("900x600")
+root.geometry("1400x1100")
 root.configure(bg="light blue")  # Light blue
 
 #all functions
@@ -21,8 +21,7 @@ c.execute('''
         phone TEXT(10),
         date_of_birth TEXT(30),
         gender TEXT(30),
-        password TEXT(30),
-        confirm_password TEXT(30)
+        password TEXT(30)
     )
 ''')
 
@@ -86,10 +85,8 @@ def login():
             messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
             password_entry.delete(0,END)
         else:
-            root.withdraw()
             user_dashboard()
     else:
-        root.withdraw()  # Hide the main window
         admin_dashboard()
           
 
@@ -106,49 +103,49 @@ def register():
     frame2.place(relx=0.5, rely=0.5, anchor="center", width=600, height=400)
 
     # Full Name
-    full_name = Label(frame2, text="Full Name:", bg="white", fg="black", font=("Arial", 16))
+    full_name = Label(frame2, text="Full Name:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     full_name.place(x=60, y=30)
     name_entry = Entry(frame2, font=("Arial", 16), bg="white", fg="black",width=25)
     name_entry.place(x=245, y=30)
 
     # Phone
-    phone = Label(frame2, text="Phone:", bg="white", fg="black", font=("Arial", 16))
+    phone = Label(frame2, text="Phone:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     phone.place(x=60, y=80)
     phone_entry = Entry(frame2, font=("Arial", 16),bg="white", fg="black", width=25)
     phone_entry.place(x=245, y=80)
 
     # Date of Birth
-    birth = Label(frame2, text="Date of Birth:", bg="white", fg="black", font=("Arial", 16))
+    birth = Label(frame2, text="Date of Birth:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     birth.place(x=60, y=130)
     birth_entry = Entry(frame2, font=("Arial", 16), bg="white", fg="black", width=25)
     birth_entry.place(x=245, y=130)
 
     #Gender
 
-    gender_label = Label(frame2, text="Gender:", bg="white", fg="black", font=("Arial", 16))
+    gender_label = Label(frame2, text="Gender:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     gender_label.place(x=60, y=180)
 
     gender_var = StringVar()
     gender_var.set("Male")
 
-    male_rb = Radiobutton(frame2, text="Male", variable=gender_var, value="Male", font=("Arial", 12), bg="white", fg="black", selectcolor="white")
+    male_rb = Radiobutton(frame2, text="Male", variable=gender_var, value="Male", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
     male_rb.place(x=245, y=180)
 
-    female_rb = Radiobutton(frame2, text="Female", variable=gender_var, value="Female", font=("Arial", 12), bg="white", fg="black", selectcolor="white")
+    female_rb = Radiobutton(frame2, text="Female", variable=gender_var, value="Female", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
     female_rb.place(x=320, y=180)
 
-    other_rb = Radiobutton(frame2, text="Other", variable=gender_var, value="Other", font=("Arial", 12), bg="white", fg="black", selectcolor="white")
+    other_rb = Radiobutton(frame2, text="Other", variable=gender_var, value="Other", font=("Arial", 14, "bold"), bg="light blue", fg="black", selectcolor="white")
     other_rb.place(x=410, y=180)
 
 
     # Password
-    password1 = Label(frame2, text="Password:", bg="white", fg="black", font=("Arial", 16))
+    password1 = Label(frame2, text="Password:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     password1.place(x=60, y=230)
     password1_entry = Entry(frame2, font=("Arial", 16), show="*", bg="white", fg="black", width=25)
     password1_entry.place(x=245, y=230)
 
     # Confirm Password
-    confirm_pass = Label(frame2, text="Confirm Password:", bg="white", fg="black", font=("Arial", 16))
+    confirm_pass = Label(frame2, text="Confirm Password:", bg="light blue", fg="black", font=("Arial", 16, "bold"))
     confirm_pass.place(x=60, y=280)
     password2_entry = Entry(frame2, font=("Arial", 16), show="*", bg="white", fg="black", width=25)
     password2_entry.place(x=245, y=280)
@@ -174,9 +171,9 @@ def register():
         conn = sqlite3.connect("clinic_management_system.db")
         c = conn.cursor()
         c.execute('''
-            INSERT INTO clinic_record(full_name, phone, date_of_birth, gender, password, confirm_password)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (n, ph, d, g, pass1, pass2))
+            INSERT INTO clinic_record(full_name, phone, date_of_birth, gender, password)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (n, ph, d, g, pass1))
         conn.commit()
         conn.close()
 
@@ -225,7 +222,7 @@ btn_login.place(x=390, y=270)
 
 # Register Prompt
 register_text=Label(frame1, text="If you don't have an account, please register", font=("Segoe UI", 12), bg="white", fg="#777")
-register_text.place(x=290, y=320)
+register_text.place(x=295, y=320)
 
 # Register Button
 btn_register1=Button(frame1, text="Register", font=("Arial", 14), fg="green",command= register)

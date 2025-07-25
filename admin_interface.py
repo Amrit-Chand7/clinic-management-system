@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import ttk 
 from PIL import Image, ImageTk
 from change_pass import change_password
 import sqlite3
@@ -9,7 +10,7 @@ def admin_dashboard():
     
     admin = Toplevel()
     admin.title("Admin Dashboard")
-    admin.state('zoomed')
+    admin.geometry("1400x1100")
     admin.configure(bg="light blue")
 
     admin_frame = Frame(admin, bg="white")
@@ -22,8 +23,44 @@ def admin_dashboard():
     def view_appointment():
         appointment1 = Toplevel() 
         appointment1.title("View appointment")
-        appointment1.geometry("400x400")
+        appointment1.geometry("600x300")
+        appointment1.resizable(False, False)
         appointment1.config(bg="light blue")
+
+        style = ttk.Style(appointment1)
+        style.theme_use('clam')
+        style.configure ("Treeview", background= "white" , foreground = "black", fieldbackground="gray")
+        
+        # Create a table using Treeview
+        table = ttk.Treeview(appointment1)
+        table["columns"] = ("Doctor", "Date", "Time", "Phone")
+
+        table.column("#0", width=0, stretch=NO)  # Hide default column
+        table.column("Doctor", width=170)
+        table.column("Date", width=100)
+        table.column("Time", width=70)
+        table.column("Phone", width=150)
+
+        table.heading("#0", text="")
+        table.heading("Doctor", text="Doctor")
+        table.heading("Date", text="Date")
+        table.heading("Time", text="Time")
+        table.heading("Phone", text="Phone")
+
+        # Place the table using place()
+        table.place(x=40, y=50, width=500, height=200)
+
+        conn = sqlite3.connect("clinic_management_system.db")
+        c = conn.cursor()
+
+        c.execute("SELECT doctor, date, time, phone FROM appointment")
+        result5 = c.fetchall()
+        conn.close()
+
+            # Insert records into the table
+        for i in result5:
+            doctor, date, time, phone = i
+            table.insert("", "end", values=(doctor, date, time, phone))
         
     def logout():
         admin.destroy()
@@ -59,6 +96,7 @@ def admin_dashboard():
             add_name_entry.delete(0, END)
             add_spec_entry.delete(0, END)
             number_spec_entry.delete(0, END)
+            doctor.destroy()
 
         def delete_doc():
             phone_num2 = phone_num1_entry.get()
@@ -83,6 +121,7 @@ def admin_dashboard():
                 conn.close()
                 messagebox.showinfo("Success", "Doctor removed successfully")
                 phone_num1_entry.delete(0, END)
+                doctor.destroy()
 
             else:
                 messagebox.showerror("Warning", "Number not found")
@@ -135,6 +174,7 @@ def admin_dashboard():
     img = img.resize((880, 560))
     photo1 = ImageTk.PhotoImage(img)
     img_label1 = Label(admin_frame, image=photo1)
+    img_label1.image = photo1
     img_label1.place(x=0, y=0)
 
     
@@ -153,7 +193,3 @@ def admin_dashboard():
     admin_logout_btn = Button(admin_frame, text="Log Out", font=("Arial", 14), width=18, fg="red",command=logout)
     admin_logout_btn.place(x=30, y=290)
 
-
-
-
-    admin.mainloop()

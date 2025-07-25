@@ -51,9 +51,10 @@ def change_password():
         
         conn = sqlite3.connect("clinic_management_system.db")
         c = conn.cursor()
+
         c.execute("SELECT password FROM admin WHERE phone = ?", (phone_n,))
         result = c.fetchone()
-        conn.close()
+       
         if result == None:
             messagebox.showerror("Error", "Phone number not found")
             return
@@ -62,19 +63,12 @@ def change_password():
             messagebox.showerror("Error", "Old password is incorrect")
             return
         
-        else:
-            result = messagebox.askyesno("Save", "Are you sure you want to change your password?")
-            
-            if result==True:
-                conn = sqlite3.connect("clinic_management_system.db")
-                c = conn.cursor()
-                c.execute("UPDATE admin SET password = ? WHERE phone = ?", (new_password, phone_n))
-                conn.commit()
-                conn.close()
-                messagebox.showinfo("Success", "Password changed successfully!")
-                password_window.destroy()
-            else:
-                messagebox.showinfo("Cancelled", "Password change cancelled.")
+        # update the password
+        c.execute("UPDATE admin SET password = ? WHERE phone = ?", (new_password, phone_n))
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("Success", "Password changed successfully!")
+        password_window.destroy()
 
     save_btn = Button(password_window, text="Save", font=("Arial", 12), width=12, command=save)
     save_btn.place(x=130, y=210)
