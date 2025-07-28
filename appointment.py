@@ -59,8 +59,14 @@ def appointment_dashboard():
         date_value = date_entry.get()
         var2 = var1.get()
         phone6= number6_entry .get()
-        if not select_doctor or not date_value or not var2 :
+        if not date_value or not var2 or not phone6:
             messagebox.showwarning("Warning", "All fields are required")
+            return
+        
+        if select_doctor_data == "Choose Doctor":
+            messagebox.showwarning("Warning", "Please select a doctor")
+            return
+        
         else:
             #connect with database
             conn = sqlite3.connect("clinic_management_system.db")
