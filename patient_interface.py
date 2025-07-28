@@ -134,7 +134,7 @@ def user_dashboard():
         # Labels and Entry fields for Change Password
         ph3_label=Label(change_password_window, text="Phone Number:", bg="light blue",fg="black", font=("Arial", 16))
         ph3_label.place(x=50, y=10)
-        ph3_entry = Entry(change_password_window, font=("Arial", 15), width=15, bg="white",fg="black", show="*")
+        ph3_entry = Entry(change_password_window, font=("Arial", 15), width=15, bg="white",fg="black")
         ph3_entry.place(x=230, y=10)
 
 
