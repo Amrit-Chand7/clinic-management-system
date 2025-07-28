@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from tkinter import ttk 
 import sqlite3
 from appointment import appointment_dashboard
 
@@ -38,7 +39,7 @@ def user_dashboard():
             if not phone3:
                 messagebox.showwarning("Warning", "Please enter your phone number")
                 return
-            
+
             # Connect to database and fetch appointments
             conn = sqlite3.connect("clinic_management_system.db")
             c = conn.cursor()
@@ -48,9 +49,33 @@ def user_dashboard():
             
             if not status:
                 messagebox.showinfo("Info", "No appointments found for this phone number")
+                phone_entry2.delete(0, END)
+                return
 
             else:
-                messagebox.showinfo("Appointments", "Appointments found for this phone number")
+                style = ttk.Style(view_window)
+                style.theme_use('clam')
+                style.configure ("Treeview", background= "white" , foreground = "black", fieldbackground="gray")
+                
+                # Create a table using Treeview
+                table = ttk.Treeview(view_window)
+                table["columns"] = ("Doctor", "Date", "Time")
+
+                table.column("#0", width=0, stretch=NO)  # Hide default column
+                table.column("Doctor", width=170)
+                table.column("Date", width=100)
+                table.column("Time", width=70)
+
+                table.heading("#0", text="")
+                table.heading("Doctor", text="Doctor")
+                table.heading("Date", text="Date")
+                table.heading("Time", text="Time")
+
+                # Place the table using place()
+                table.place(x=40, y=65, width=500, height=200)
+                
+                for j in status:
+                    table.insert("", "end", values=j)
 
         search_btn = Button(view_window, text="Search", font=("Arial", 10), bg="lightgreen", command=show_appointments)
         search_btn.place(x=470, y=20)
