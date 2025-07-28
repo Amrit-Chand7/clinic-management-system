@@ -18,6 +18,43 @@ def user_dashboard():
     def open_appointment():
         appointment_dashboard()
 
+   
+    def view_my_appointments():
+        view_window = Toplevel(patient_dashboard)
+        view_window.title("My Appointments")
+        view_window.geometry("600x300")
+        view_window.configure(bg="light blue")
+        view_window.resizable(False, False)
+
+        phone_label2 = Label(view_window, text="Enter your phone number:", bg="light blue", fg="black", font=("Arial", 14, "bold"))
+        phone_label2.place(x=20, y=20)
+
+        phone_entry2 = Entry(view_window, font=("Arial", 14), width=15, bg="white", fg="black")
+        phone_entry2.place(x=290, y=20)
+
+
+        def show_appointments():
+            phone3 = phone_entry2.get()
+            if not phone3:
+                messagebox.showwarning("Warning", "Please enter your phone number")
+                return
+            
+            # Connect to database and fetch appointments
+            conn = sqlite3.connect("clinic_management_system.db")
+            c = conn.cursor()
+            c.execute("SELECT doctor, date, time FROM appointment WHERE phone = ?", (phone3,))
+            status = c.fetchall()
+            conn.close()
+            
+            if not status:
+                messagebox.showinfo("Info", "No appointments found for this phone number")
+
+            else:
+                messagebox.showinfo("Appointments", "Appointments found for this phone number")
+
+        search_btn = Button(view_window, text="Search", font=("Arial", 10), bg="lightgreen", command=show_appointments)
+        search_btn.place(x=470, y=20)
+
 
     # Function to open Change Password window
     def open_change_password():
@@ -186,14 +223,18 @@ def user_dashboard():
     img_label.place(x=0, y=0)
 
     #  Buttons on Left
+
+    view_appointments_btn = Button(dashboard_frame, text="View My Appointments", font=("Arial", 16), width=18, command=view_my_appointments)
+    view_appointments_btn.place(x=55, y=80)
+
     appointment_btn = Button(dashboard_frame, text="Appointment", font=("Arial", 16), width=18, command=open_appointment)
-    appointment_btn.place(x=55, y=100)
+    appointment_btn.place(x=55, y=150)
 
     change_password_btn = Button(dashboard_frame, text="Change Password", font=("Arial", 16), width=18, command=open_change_password)
-    change_password_btn.place(x=55, y=170)
+    change_password_btn.place(x=55, y=220)
 
     update_profile_btn = Button(dashboard_frame, text="Update Profile", font=("Arial", 16), width=18, command=open_update_profile)
-    update_profile_btn.place(x=55, y=240)
+    update_profile_btn.place(x=55, y=290)
 
     log_out_btn = Button(dashboard_frame, text="Log Out", font=("Arial", 16), width=18, fg="red", command=log_out)
-    log_out_btn.place(x=55, y=310)
+    log_out_btn.place(x=55,y=360)
