@@ -89,7 +89,11 @@ def login():
     else:
         admin_dashboard()
           
-
+def see_password():
+    if show_var1.get():
+        password_entry["show"] = ""   # Show password
+    else:
+        password_entry["show"] = "*"  # Hide password
 
 # ------------------ Register Function ------------------
 def register():
@@ -215,6 +219,11 @@ password = Label(form_bg, text="Password", font=("Segoe UI", 14), bg="white", fg
 password.place(x=50, y=180)
 password_entry = Entry(form_bg, font=("Segoe UI", 14), show="*", width=30, bg="#eef", fg="black")
 password_entry.place(x=50, y=210)
+
+# Show Password Button for Login
+show_var1 = BooleanVar()
+show_password_btn=Checkbutton(form_bg, text="show password", variable=show_var1, font=("Segoe UI", 10,"bold"), fg="black", bg="white", command=see_password)
+show_password_btn.place(x=225, y=245)
 
 # Login Button
 btn_login=Button(frame1, text="Login", font=("Arial", 18), fg="blue",command= login)

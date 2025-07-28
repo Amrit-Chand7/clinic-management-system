@@ -70,5 +70,8 @@ def change_password():
         messagebox.showinfo("Success", "Password changed successfully!")
         password_window.destroy()
 
-    save_btn = Button(password_window, text="Save", font=("Arial", 12), width=12, command=save)
-    save_btn.place(x=165, y=210)
+    save_btn = Button(password_window, text="Save", font=("Arial", 16), fg="green", width=8, command=save)
+    save_btn.place(x=120, y=210)
+
+    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=8, command=password_window.destroy)
+    cancel_btn4.place(x=270, y=210)

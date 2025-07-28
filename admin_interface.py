@@ -68,12 +68,12 @@ def admin_dashboard():
     def manage_doctors():
         doctor = Toplevel(admin)
         doctor.title("Manage Doctors")
-        doctor.geometry("800x800")
+        doctor.geometry("580x750")
         doctor.configure(bg="light blue")
         doctor.resizable(False, False)
 
         add_frame = Frame(doctor, bg="white") 
-        add_frame.place(relx=0.27, rely=0.1, width=390, height=280) 
+        add_frame.place(relx=0.15, rely=0.1, width=390, height=280) 
 
         def add_doc():
             name_doc= add_name_entry.get()
@@ -130,7 +130,7 @@ def admin_dashboard():
 
         # ---------- Add Doctor Section ----------
         add_label = Label(add_frame, text="Add Doctor",bg= "white", fg="black" ,font=("Arial", 18, "bold"))
-        add_label.place(x=110,y=10)
+        add_label.place(x=117,y=10)
 
         name_label = Label(add_frame, text="Name:", fg="black",bg="white", font=("Arial", 13))
         name_label.place(x=20, y=58)
@@ -148,26 +148,32 @@ def admin_dashboard():
         number_spec_entry.place(x=142, y=153)
 
     
-        btn_save = Button(add_frame, text="Save", fg="Green", width=12, font=("Arial", 14), command=add_doc)
-        btn_save.place(x=100, y=200)
+        btn_save = Button(add_frame, text="Save", fg="Green", width=8, font=("Arial", 16), command=add_doc)
+        btn_save.place(x=60, y=215)
+
+        cancel_btn2 = Button(add_frame, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=7, command=doctor.destroy)
+        cancel_btn2.place(x=225, y=215)
     
         #doctor frame 
         remove_frame = Frame(doctor, bg="white") 
-        remove_frame.place(relx=0.27, rely=0.5, width=390, height=280) 
+        remove_frame.place(relx=0.15, rely=0.5, width=390, height=280) 
 
         # ---------- Remove doctor ----------
         remove_label = Label(remove_frame, text="Remove Doctor",bg= "white", fg="black", font=("Arial", 18, "bold"))
-        remove_label.place(x=85,y=20)
+        remove_label.place(x=96,y=20)
 
         phone_num_label = Label(remove_frame, text="Phone number:", fg="black",bg="white", font=("Arial", 14))
         phone_num_label.place(x=32, y=94)
         phone_num1_entry = Entry(remove_frame, width=20,bg="white",fg="black")
-        phone_num1_entry.place(x=157, y=90)
+        phone_num1_entry.place(x=157, y=94)
 
     
 
-        btn_del = Button(remove_frame, text="Delete", fg="blue", width=12, font=("Arial", 14),command= delete_doc)
-        btn_del.place(x=100, y=160)
+        btn_del = Button(remove_frame, text="Delete", fg="blue", width=8, font=("Arial", 16),command= delete_doc)
+        btn_del.place(x=60, y=160)
+
+        cancel_btn3 = Button(remove_frame, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=7, command=doctor.destroy)
+        cancel_btn3.place(x=225, y=160)
 
         # ------------------ Image ------------------
     img = Image.open("image/admin.jpg")
