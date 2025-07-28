@@ -73,5 +73,5 @@ def change_password():
     save_btn = Button(password_window, text="Save", font=("Arial", 16), fg="green", width=8, command=save)
     save_btn.place(x=120, y=210)
 
-    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=8, command=password_window.destroy)
+    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 14), fg="red", width=8, command=password_window.destroy)
     cancel_btn4.place(x=270, y=210)
