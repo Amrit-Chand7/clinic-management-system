@@ -12,6 +12,14 @@ def change_password():
     password_window.configure(bg="light blue")
     password_window.resizable(False, False)
 
+
+    def cancel_add1():
+        cancel7= messagebox.askyesno("Cancel", "Are you sure you want to cancel?")
+        if cancel7 == True:
+            password_window.destroy()
+        else:
+            messagebox.showinfo("Info", "Cancelled")
+
     # Labels and Entry fields
     num1_label = Label(password_window, text="Number:", bg="light blue", font=("Arial", 15),fg="black")
     num1_label.place(x=50, y=20)
@@ -73,5 +81,5 @@ def change_password():
     save_btn = Button(password_window, text="Save", font=("Arial", 16), fg="green", width=8, command=save)
     save_btn.place(x=120, y=210)
 
-    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 14), fg="red", width=8, command=password_window.destroy)
+    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 14), fg="red", width=8, command=cancel_add1)
     cancel_btn4.place(x=270, y=210)

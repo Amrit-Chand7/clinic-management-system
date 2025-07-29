@@ -80,6 +80,13 @@ def admin_dashboard():
         add_frame = Frame(doctor, bg="white") 
         add_frame.place(relx=0.15, rely=0.1, width=390, height=280) 
 
+        def cancel_add():
+            cancel6= messagebox.askyesno("Cancel", "Are you sure you want to cancel?")
+            if cancel6 == True:
+                doctor.destroy()
+            else:
+                messagebox.showinfo("Info", "Cancelled")
+
         def add_doc():
             name_doc= add_name_entry.get()
             spec_doc = add_spec_entry.get()
@@ -156,7 +163,7 @@ def admin_dashboard():
         btn_save = Button(add_frame, text="Save", fg="Green", width=8, font=("Arial", 16), command=add_doc)
         btn_save.place(x=60, y=215)
 
-        cancel_btn2 = Button(add_frame, text="Cancel", font=("Segoe UI", 14),fg="red", width=7, command=doctor.destroy)
+        cancel_btn2 = Button(add_frame, text="Cancel", font=("Segoe UI", 14),fg="red", width=7, command=cancel_add)
         cancel_btn2.place(x=225, y=215)
     
         #doctor frame 
@@ -177,7 +184,7 @@ def admin_dashboard():
         btn_del = Button(remove_frame, text="Delete", fg="blue", width=8, font=("Arial", 16),command= delete_doc)
         btn_del.place(x=60, y=160)
 
-        cancel_btn3 = Button(remove_frame, text="Cancel", font=("Segoe UI", 14), fg="red", width=7, command=doctor.destroy)
+        cancel_btn3 = Button(remove_frame, text="Cancel", font=("Segoe UI", 14), fg="red", width=7, command=cancel_add)
         cancel_btn3.place(x=230, y=162)
 
         # ------------------ Image ------------------

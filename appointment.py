@@ -15,7 +15,9 @@ def appointment_dashboard():
     final_window.resizable(False, False)
     final_window.configure(bg="light blue")
 
-
+    def cancel5():
+        messagebox.showinfo("Cancel", "Cancel")
+        final_window.destroy()
 
     number6_label = Label(final_window, text="Phone:", font=("Segoe UI", 17, "bold"),fg= "black" ,bg="light blue")
     number6_label.place(x=68, y=20)
@@ -87,7 +89,7 @@ def appointment_dashboard():
     save_btn = Button(final_window, text="Save", font=("Segoe UI", 16), bg="lightgreen", width=10, command = save2_btn)
     save_btn.place(x=55, y=365)
 
-    cancel_btn = Button(final_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=10, command=final_window.destroy)
+    cancel_btn = Button(final_window, text="Cancel", font=("Segoe UI", 16), bg="lightcoral", width=10, command=cancel5)
     cancel_btn.place(x=235, y=365)
     
     
