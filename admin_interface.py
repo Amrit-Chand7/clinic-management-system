@@ -63,8 +63,13 @@ def admin_dashboard():
             table.insert("", "end", values=(doctor, date, time, phone))
         
     def logout():
-        admin.destroy()
-        
+            ask_que=messagebox.askyesno("Log Out", "Are you sure you want to log out?")
+            if ask_que == True:
+                admin.destroy()
+
+            else:
+                messagebox.showinfo("Info", "Logout cancelled")
+
     def manage_doctors():
         doctor = Toplevel(admin)
         doctor.title("Manage Doctors")

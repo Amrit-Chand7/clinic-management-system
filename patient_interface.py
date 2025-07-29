@@ -238,7 +238,12 @@ def user_dashboard():
 
     # Function to log out
     def log_out():
-            patient_dashboard.destroy()
+            ask_que=messagebox.askyesno("Log Out", "Are you sure you want to log out?")
+            if ask_que == True:
+                patient_dashboard.destroy()
+                
+            else:
+                messagebox.showinfo("Info", "Logout cancelled")
 
     img = Image.open("image/admin.jpg")  
     img = img.resize((880, 560))
