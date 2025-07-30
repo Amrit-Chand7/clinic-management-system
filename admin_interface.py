@@ -5,9 +5,9 @@ from PIL import Image, ImageTk
 from change_pass import change_password
 import sqlite3
 
-def admin_dashboard():
+def admin_dashboard(root):
     # ------- Admin Dashboard ---------
-    
+
     admin = Toplevel()
     admin.title("Admin Dashboard")
     admin.geometry("1400x1100")
@@ -66,6 +66,7 @@ def admin_dashboard():
             ask_que=messagebox.askyesno("Log Out", "Are you sure you want to log out?")
             if ask_que == True:
                 admin.destroy()
+                root.deiconify() # Show the main window again
 
             else:
                 messagebox.showinfo("Info", "Logout cancelled")
