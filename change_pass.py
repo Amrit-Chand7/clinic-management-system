@@ -8,31 +8,39 @@ def change_password():
     # Main window
     password_window = Toplevel()
     password_window.title("Change Password")
-    password_window.geometry("500x400")
+    password_window.geometry("500x300")
     password_window.configure(bg="light blue")
     password_window.resizable(False, False)
 
+
+    def cancel_add1():
+        cancel7= messagebox.askyesno("Cancel", "Are you sure you want to cancel?")
+        if cancel7 == True:
+            password_window.destroy()
+        else:
+            messagebox.showinfo("Info", "Cancelled")
+
     # Labels and Entry fields
     num1_label = Label(password_window, text="Number:", bg="light blue", font=("Arial", 15),fg="black")
-    num1_label.place(x=65, y=20)
+    num1_label.place(x=50, y=20)
     num1_entry = Entry(password_window, font=("Arial", 12),bg="white", fg="black", width=25)
-    num1_entry.place(x=225, y=20)
+    num1_entry.place(x=228, y=20)
 
 
     old_label = Label(password_window, text="Old Password:", bg="light blue", font=("Arial", 15),fg="black")
     old_label.place(x=50, y=60)
     old_pass_entry = Entry(password_window, font=("Arial", 12),bg="white", fg="black", width=25, show="*")
-    old_pass_entry.place(x=225, y=60)
+    old_pass_entry.place(x=228, y=60)
 
     new_label = Label(password_window, text="New Password:", bg="light blue", fg="black", font=("Arial", 15))
     new_label.place(x=50, y=100)
     new_pass_entry = Entry(password_window, font=("Arial", 12), bg="white", fg="black", width=25, show="*")
-    new_pass_entry.place(x=225, y=100)
+    new_pass_entry.place(x=228, y=100)
 
     confirm_label = Label(password_window, text="Confirm Password:", bg="light blue", fg="black", font=("Arial", 15))
     confirm_label.place(x=50, y=140)
     confirm_pass_entry = Entry(password_window, font=("Arial", 12), bg="white", fg="black", width=25, show="*")
-    confirm_pass_entry.place(x=225, y=140)
+    confirm_pass_entry.place(x=228, y=142)
 
     # Function to handle cancellation
     def save():
@@ -51,9 +59,10 @@ def change_password():
         
         conn = sqlite3.connect("clinic_management_system.db")
         c = conn.cursor()
+
         c.execute("SELECT password FROM admin WHERE phone = ?", (phone_n,))
         result = c.fetchone()
-        conn.close()
+       
         if result == None:
             messagebox.showerror("Error", "Phone number not found")
             return
@@ -62,19 +71,15 @@ def change_password():
             messagebox.showerror("Error", "Old password is incorrect")
             return
         
-        else:
-            result = messagebox.askyesno("Save", "Are you sure you want to change your password?")
-            
-            if result==True:
-                conn = sqlite3.connect("clinic_management_system.db")
-                c = conn.cursor()
-                c.execute("UPDATE admin SET password = ? WHERE phone = ?", (new_password, phone_n))
-                conn.commit()
-                conn.close()
-                messagebox.showinfo("Success", "Password changed successfully!")
-                password_window.destroy()
-            else:
-                messagebox.showinfo("Cancelled", "Password change cancelled.")
+        # update the password
+        c.execute("UPDATE admin SET password = ? WHERE phone = ?", (new_password, phone_n))
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("Success", "Password changed successfully!")
+        password_window.destroy()
 
-    save_btn = Button(password_window, text="Save", font=("Arial", 12), width=12, command=save)
-    save_btn.place(x=130, y=210)
+    save_btn = Button(password_window, text="Save", font=("Arial", 16), fg="green", width=8, command=save)
+    save_btn.place(x=120, y=210)
+
+    cancel_btn4 = Button(password_window, text="Cancel", font=("Segoe UI", 14), fg="red", width=8, command=cancel_add1)
+    cancel_btn4.place(x=270, y=210)
