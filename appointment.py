@@ -55,7 +55,7 @@ def appointment_dashboard():
 
         r4=Radiobutton(final_window,text="2:00  pm",variable=var1, value= "2:00 pm"  , bg= "light blue", fg= "black",font=("Arial",14))
         r4.place(x=250,y=320)
-
+        
     def save2_btn():
         select_doctor_data= select_doctor.get()
         date_value = date_entry.get()
