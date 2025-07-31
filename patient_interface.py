@@ -7,7 +7,7 @@ from appointment import appointment_dashboard
 
 
 # Function to open Appointment window
-def user_dashboard():
+def user_dashboard(root):
     patient_dashboard = Toplevel()
     patient_dashboard.title("Patient Dashboard")
     patient_dashboard.geometry("1400x1100")
@@ -241,6 +241,7 @@ def user_dashboard():
             ask_que=messagebox.askyesno("Log Out", "Are you sure you want to log out?")
             if ask_que == True:
                 patient_dashboard.destroy()
+                root.deiconify() # Show the main window again
                 
             else:
                 messagebox.showinfo("Info", "Logout cancelled")

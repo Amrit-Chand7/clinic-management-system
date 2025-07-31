@@ -85,9 +85,14 @@ def login():
             messagebox.showerror("Login Failed", "Invalid phone number or password. Please try again.")
             password_entry.delete(0,END)
         else:
-            user_dashboard()
+            messagebox.showinfo("Login Successful", "Welcome to the Clinic Management System")
+            user_dashboard(root)
+            root.withdraw()  # Hide the main window after login
+            
     else:
-        admin_dashboard()
+        messagebox.showinfo("Login Successful", "Welcome to the Clinic Management System")
+        admin_dashboard(root)
+        root.withdraw()  # Hide the main window after login
           
 def see_password():
     if show_var1.get():
